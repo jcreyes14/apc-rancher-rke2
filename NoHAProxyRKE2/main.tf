@@ -173,8 +173,8 @@ resource "vsphere_virtual_machine" "rancher01" {
 
 
   provisioner "file" {
-    source      = "files/script.sh"
-    destination = "/tmp/script.sh"
+    source      = "files/rke2_install_script.sh"
+    destination = "/tmp/rke2_install_script.sh"
 
     connection {
       type     = "ssh"
@@ -205,12 +205,12 @@ resource "vsphere_virtual_machine" "rancher01" {
     }
 
     inline = [
-      "sudo chmod +x /tmp/script.sh",
+      "sudo chmod +x /tmp/rke2_install_script.sh",
       "sudo mkdir -p /etc/rancher/rke2",
       "sudo cp /tmp/config.yaml /etc/rancher/rke2",
       "echo '${var.vm_02["ip"]} ${var.vm_02["fqdn"]} ${var.vm_02["name"]}' | sudo tee -a /etc/hosts",
       "echo '${var.vm_03["ip"]} ${var.vm_03["fqdn"]} ${var.vm_03["name"]}' | sudo tee -a /etc/hosts",
-      "sudo /tmp/script.sh"
+      "sudo /tmp/rke2_install_script.sh"
     ]
   }
   lifecycle {
@@ -262,8 +262,8 @@ resource "vsphere_virtual_machine" "rancher02" {
 
 
   provisioner "file" {
-    source      = "files/script.sh"
-    destination = "/tmp/script.sh"
+    source      = "files/rke2_install_script.sh"
+    destination = "/tmp/rke2_install_script.sh"
 
     connection {
       type = "ssh"
@@ -294,12 +294,12 @@ resource "vsphere_virtual_machine" "rancher02" {
     }
 
     inline = [
-      "sudo chmod +x /tmp/script.sh",
+      "sudo chmod +x /tmp/rke2_install_script.sh",
       "sudo mkdir -p /etc/rancher/rke2",
       "sudo cp /tmp/config.yaml /etc/rancher/rke2",
       "echo '${var.vm_01["ip"]} ${var.vm_01["fqdn"]} ${var.vm_01["name"]}' | sudo tee -a /etc/hosts",
       "echo '${var.vm_03["ip"]} ${var.vm_03["fqdn"]} ${var.vm_03["name"]}' | sudo tee -a /etc/hosts",
-      "sudo /tmp/script.sh"
+      "sudo /tmp/rke2_install_script.sh"
     ]
   }
   lifecycle {
@@ -353,8 +353,8 @@ resource "vsphere_virtual_machine" "rancher03" {
 
 
   provisioner "file" {
-    source      = "files/script.sh"
-    destination = "/tmp/script.sh"
+    source      = "files/rke2_install_script.sh"
+    destination = "/tmp/rke2_install_script.sh"
 
     connection {
       type     = "ssh"
@@ -398,13 +398,13 @@ resource "vsphere_virtual_machine" "rancher03" {
     }
 
     inline = [
-      "sudo chmod +x /tmp/script.sh",
+      "sudo chmod +x /tmp/rke2_install_script.sh",
       "sudo chmod +x /tmp/rancher_install.sh",
       "sudo mkdir -p /etc/rancher/rke2",
       "sudo cp /tmp/config.yaml /etc/rancher/rke2",
       "echo '${var.vm_01["ip"]} ${var.vm_01["fqdn"]} ${var.vm_01["name"]}' | sudo tee -a /etc/hosts",
       "echo '${var.vm_02["ip"]} ${var.vm_02["fqdn"]} ${var.vm_02["name"]}' | sudo tee -a /etc/hosts",
-      "sudo /tmp/script.sh",
+      "sudo /tmp/rke2_install_script.sh",
       "sudo chown root:root /tmp/rancher_install.sh",
       "sudo chmod u+s /tmp/rancher_install.sh",
       "sudo /tmp/rancher_install.sh"
